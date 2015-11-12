@@ -1,0 +1,14 @@
+{
+    "name": "staconik/EpnBzLib",
+    "description": "Library for epn.bz",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stas Pazhoha",
+            "email": "staconik@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"EpnBzLib\\": "src/EpnBzLib/"}
+    }
+}
