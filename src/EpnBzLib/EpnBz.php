@@ -37,4 +37,11 @@ class EpnBz
 			}
 		}
 	}
+
+	public function short($url)
+	{
+		$short_url = 'https://epn.bz/ru/creative/url-to-short';
+		$data = array('url' => $url);
+		return trim($this->client->post($short_url, $data, true));
+	}
 }
