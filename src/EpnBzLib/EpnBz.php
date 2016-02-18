@@ -2,6 +2,7 @@
 
 class EpnBz
 {
+
 	public function __construct($epn_login, $epn_password)
 	{
 		$this->client = new Client();
@@ -36,12 +37,17 @@ class EpnBz
 				}
 			}
 		}
+		return false;
 	}
 
 	public function short($url)
 	{
 		$short_url = 'https://epn.bz/ru/creative/url-to-short';
 		$data = json_encode(array('url' => $url));
-		return trim($this->client->post($short_url, $data, true));
+		$return = trim($this->client->post($short_url, $data, true));
+		if (strpos($return, 'ali.pub') === false) {
+			return false;
+		}
+		return $return;
 	}
 }
