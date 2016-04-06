@@ -32,6 +32,9 @@ class EpnBz
 		$result = json_decode($this->client->post($list_url, $list_temp), true);
 		foreach ($result as $creatives) {
 			foreach ($creatives as $creative) {
+				if (!array_key_exists('description', $creative)) {
+					continue;
+				}
 				if ($creative['description'] == $name) {
 					return $creative['code'];
 				}
