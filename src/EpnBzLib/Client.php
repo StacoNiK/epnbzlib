@@ -9,8 +9,8 @@ class Client
 		$this->ch = curl_init();
 		curl_setopt($this->ch , CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->ch , CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($this->ch , CURLOPT_COOKIEJAR, 'cookie.txt');
-		curl_setopt($this->ch , CURLOPT_COOKIEFILE, 'cookie.txt');
+		curl_setopt($this->ch , CURLOPT_COOKIEJAR, __DIR__.'cookie.txt');
+		curl_setopt($this->ch , CURLOPT_COOKIEFILE, __DIR__.'cookie.txt');
 	}
 
 	public function request($url, $ajax)
