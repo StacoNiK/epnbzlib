@@ -23,7 +23,7 @@ class EpnBz
 		$this->client->get($url);
 		$ali_url = $this->client->getUrl(); 
 
-		$temp = json_encode(array("format" => "1","isAllow" => 0,"link" => $ali_url,"desc" => $name,"image" => "","rejectChange" => false,"expiration_time" => "","no_affiliate_direct" => true,"lang" => null,"selected_banners"=> array(),"size" => "300x250"));
+		$temp = json_encode(array("format" => "1","isAllow" => 0,"link" => $ali_url,"desc" => $name,"image" => "","rejectChange" => false,"expiration_time" => "","no_affiliate_direct" => true,"lang" => null,"selected_banners"=> array(),"size" => "300x250","offer_type" => "ali"));
 		$create_url = 'https://epn.bz/ru/creative/create';
 		$res = $this->client->post($create_url, $temp, true);
 
