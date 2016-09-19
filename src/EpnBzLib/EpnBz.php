@@ -15,7 +15,7 @@ class EpnBz
 		}
 	}
 
-	public function getUrl($url, $name = false)
+	public function getUrl($url, $name = false, $offer_type = 'ali')
 	{
 		if (!$name) {
 			$name = rand(1, 4512312).rand(5342, 1231313);
@@ -23,7 +23,7 @@ class EpnBz
 		$this->client->get($url);
 		$ali_url = $this->client->getUrl(); 
 
-		$temp = json_encode(array("format" => "1","isAllow" => 0,"link" => $ali_url,"desc" => $name,"image" => "","rejectChange" => false,"expiration_time" => "","no_affiliate_direct" => true,"lang" => null,"selected_banners"=> array(),"size" => "300x250","offer_type" => "ali"));
+		$temp = json_encode(array("format" => "1","isAllow" => 0,"link" => $ali_url,"desc" => $name,"image" => "","rejectChange" => false,"expiration_time" => "","no_affiliate_direct" => true,"lang" => null,"selected_banners"=> array(),"size" => "300x250","offer_type" => $offer_type));
 		$create_url = 'https://epn.bz/ru/creative/create';
 		$res = $this->client->post($create_url, $temp, true);
 
