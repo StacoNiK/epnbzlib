@@ -20,8 +20,17 @@ class EpnBz
 		if (!$name) {
 			$name = rand(1, 4512312).rand(5342, 1231313);
 		}
-		$this->client->get($url);
-		$ali_url = $this->client->getUrl(); 
+		$ali_page = $this->client->get($url);
+		$ali_url = $this->client->getUrl();
+		if (strpos($ali_url, 'alipromo') !== false) {
+			$html = str_get_html($ali_page);
+			$iframes = $html->find(".main-iframe");
+			foreach ($iframes as $iframe) {
+				$u = $iframe->src;
+				$url = "http://http://alipromo.com".urldecode($u);
+				return $this->getUrl($url, $name, $offer_type);
+			}
+		} 
 
 		$temp = json_encode(array("format" => "1","isAllow" => 0,"link" => $ali_url,"desc" => $name,"image" => "","rejectChange" => false,"expiration_time" => "","no_affiliate_direct" => true,"lang" => null,"selected_banners"=> array(),"size" => "300x250","offer_type" => $offer_type));
 		$create_url = 'https://epn.bz/ru/creative/create';

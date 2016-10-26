@@ -10,5 +10,8 @@
     ],
     "autoload": {
         "psr-4": {"EpnBzLib\\": "src/EpnBzLib/"}
+    },
+    "require": {
+        "emanueleminotto/simple-html-dom": "^1.5"
     }
 }
