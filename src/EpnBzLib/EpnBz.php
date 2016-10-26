@@ -23,12 +23,17 @@ class EpnBz
 		$ali_page = $this->client->get($url);
 		$ali_url = $this->client->getUrl();
 		if (strpos($ali_url, 'alipromo') !== false) {
-			$html = str_get_html($ali_page);
+			$html = new \simple_html_dom();
+			$html->load($ali_page);
 			$iframes = $html->find(".main-iframe");
 			foreach ($iframes as $iframe) {
 				$u = $iframe->src;
-				$url = "http://http://alipromo.com".urldecode($u);
-				return $this->getUrl($url, $name, $offer_type);
+				$d = explode('to=', urldecode($u), 2);
+				if (array_key_exists(1, $d)) {
+					return $this->getUrl($d[1], $name, $offer_type);
+				} else {
+					return false;
+				}
 			}
 		} 
 
@@ -41,6 +46,9 @@ class EpnBz
 		$result = json_decode($this->client->post($list_url, $list_temp), true);
 		foreach ($result as $creatives) {
 			foreach ($creatives as $creative) {
+				if (!is_array($creative)) {
+					continue;
+				}
 				if (!array_key_exists('description', $creative)) {
 					continue;
 				}
